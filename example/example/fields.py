@@ -40,6 +40,9 @@ class HandField(models.Field):
         kwargs['max_length'] = 104
         super(HandField, self).__init__(*args, **kwargs)
 
+    def db_type(self, connection):
+        return 'char(%s)' % self.max_length
+
     def deconstruct(self):
         name, path, args, kwargs = super(HandField, self).deconstruct()
         del kwargs["max_length"]

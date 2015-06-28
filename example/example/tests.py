@@ -15,12 +15,22 @@ def hand_factory():
 
 
 class HandInHStoreTestCase(TestCase):
-    def test_writing_and_reading_a_hand(self):
+    def test_writing_and_reading_a_hand_with_hstore(self):
         instance = HandInHStore()
-        hand = Hand(['2s', '3s'], ['2h', '3h'], ['2c', '3c'], ['2d', '3d'])
+        hand = hand_factory()
 
         instance.hand = hand
         instance.save()
         instance.refresh_from_db()
 
         self.assertEqual(hand, instance.hand)
+
+    def test_writing_and_reading_a_native_hand(self):
+        instance = HandInHStore()
+        hand = hand_factory()
+
+        instance.native_hand = hand
+        instance.save()
+        instance.refresh_from_db()
+
+        self.assertEqual(hand, instance.native_hand)

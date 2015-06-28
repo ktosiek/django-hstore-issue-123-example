@@ -10,3 +10,6 @@ class HandInHStore(models.Model):
             'class': HandField,
         },
     ])
+
+    native_hand = HandField()
+
